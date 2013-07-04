@@ -1,0 +1,25 @@
+<project name="flagbit-packages" default="build" basedir=".">
+    <condition property="php.bin" value="php.exe">
+        <os family="windows"/>
+    </condition>
+    <property name="php.bin" value="php"/>
+
+    <target name="satis.installed">
+        <available file="satis" property="satis.installed"/>
+    </target>
+
+    <target name="satis.install" unless="satis.installed" depends="satis.installed">
+        <get src="http://getcomposer.org/composer.phar" dest="${basedir}" skipexisting="true"/>
+        <exec executable="${php.bin}">
+            <arg line="composer.phar create-project --keep-vcs composer/satis --stability=dev"/>
+        </exec>
+    </target>
+
+    <target name="satis.build">
+        <exec executable="${php.bin}">
+            <arg line="satis/bin/satis build satis.json web"/>
+        </exec>
+    </target>
+
+    <target name="build" depends="satis.install,satis.build"/>
+</project>
