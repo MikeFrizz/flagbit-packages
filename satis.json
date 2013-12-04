@@ -1,6 +1,6 @@
 {
     "name": "Flagbit",
-    "homepage": "http://packages.flagbit.com",
+    "homepage": "https://packages.flagbit.com",
     "repositories": [
         {
             "type": "vcs",
